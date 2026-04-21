@@ -1,0 +1,26 @@
+package com.sunbeam;
+
+import java.util.Scanner;
+
+public class Q2 {
+	
+	public static int LinearSearch(int[] arr,int key) {
+		int comparisons = 0;
+		
+		for (int i = 0;i < arr.length; i++) {
+			
+			comparisons++;
+			System.out.println("Comparison : "+comparisons+"Checking arr["+i+"] = "+arr[i]);
+			
+			if (arr[i] == key) {
+				System.out.println("Key : "+key+" Found at index : "+i);
+			}
+		}
+		System.out.println("Key not found!");
+		return comparisons;
+	}
+	
+    public static void main(String[] args) {
+
+    }
+}

@@ -1,0 +1,105 @@
+package com.sunbeam;
+
+import java.util.Scanner;
+
+public class Q2 {
+
+    // LINEAR SEARCH
+    
+    public static int linearSearch(int[] arr, int key) {
+
+        int comparisons = 0; // counter to track how many times we compared
+
+        for (int i = 0; i < arr.length; i++) {
+
+            comparisons++; // every time we check arr[i]==key, count it
+            System.out.println("Comparison " + comparisons + 
+                               " : Checking arr[" + i + "] = " + arr[i]);
+
+            if (arr[i] == key) {
+                System.out.println(">> Key " + key + " FOUND at index " + i);
+                System.out.println(">> Total comparisons (Linear) = " + comparisons);
+                return comparisons; // return how many comparisons it took
+            }
+        }
+
+        // if we reach here, key was not found
+        System.out.println(">> Key NOT found");
+        System.out.println(">> Total comparisons (Linear) = " + comparisons);
+        return comparisons;
+    }
+
+    // ============================================
+    // METHOD 2 : BINARY SEARCH
+    // array must be sorted!
+    // cuts the array in HALF each time
+    // ============================================
+    public static int binarySearch(int[] arr, int key) {
+
+        int comparisons = 0; // counter to track comparisons
+
+        int low = 0;              // start of array
+        int high = arr.length-1;  // end of array
+
+        // keep searching until low crosses high
+        while (low <= high) {
+
+            int mid = (low + high) / 2; // find middle index
+            comparisons++; // we are about to compare, so count it
+
+            System.out.println("Comparison " + comparisons + 
+                               " : low=" + low + 
+                               " high=" + high + 
+                               " mid=" + mid + 
+                               " arr[mid]=" + arr[mid]);
+
+            if (arr[mid] == key) {
+                // middle element is the key
+                System.out.println(">> Key " + key + " FOUND at index " + mid);
+                System.out.println(">> Total comparisons (Binary) = " + comparisons);
+                return comparisons;
+
+            } else if (arr[mid] < key) {
+                // key is in RIGHT half → ignore left half
+                System.out.println("   " + key + " > " + arr[mid] + " → Search RIGHT half");
+                low = mid + 1; // move low to right of mid
+
+            } else {
+                // key is in LEFT half → ignore right half
+                System.out.println("   " + key + " < " + arr[mid] + " → Search LEFT half");
+                high = mid - 1; // move high to left of mid
+            }
+        }
+
+        // if we reach here, key was not found
+        System.out.println(">> Key NOT found");
+        System.out.println(">> Total comparisons (Binary) = " + comparisons);
+        return comparisons;
+    }
+    
+    public static void main(String[] args) {
+
+        // sorted array is MUST for binary search
+        int[] arr = {11, 22, 33, 44, 55, 66, 77, 88, 99};
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter key to search : ");
+        int key = scanner.nextInt();
+
+        //      LINEAR SEARCH 
+        System.out.println("\n===== LINEAR SEARCH =====");
+        int linearCount = linearSearch(arr, key);
+
+        //      BINARY SEARCH 
+        System.out.println("\n===== BINARY SEARCH =====");
+        int binaryCount = binarySearch(arr, key);
+
+        //      COMPARISON RESULT 
+        System.out.println("\n===== RESULT =====");
+        System.out.println("Linear Search comparisons : " + linearCount);
+        System.out.println("Binary Search comparisons : " + binaryCount);
+        System.out.println("Binary Search saved       : " + (linearCount - binaryCount) + " comparisons!");
+
+        scanner.close();
+    }
+}

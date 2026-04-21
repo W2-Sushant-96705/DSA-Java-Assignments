@@ -1,0 +1,42 @@
+//-----------------------------BINARY SEARCH------------------------------
+
+package com.sunbeam;
+
+import java.util.Scanner;
+
+public class Q2_2 {
+	
+	public static int binarySearch(int[] arr,int key) {
+		int comparisons = 0;
+		
+		int left = 0;
+		int right = arr.length-1;
+		
+		while (left <= right) {
+			
+			int mid = (left + right)/2;
+			comparisons++;
+			
+			System.out.println("Comparison " + comparisons + 
+								" : left = "+left+" right = "+right+" mid = "+mid+" arr[mid] = "+arr[mid]);
+			
+			if (arr[mid] == key) {
+				System.out.println("Key : "+key+" Found at index " +mid );
+				return comparisons;
+			}
+		}return comparisons;
+	}
+	public static void main(String[] args) {
+		
+		int[] arr = {11, 22, 33, 44, 55, 66, 77, 88, 99};
+		
+		Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter key to search : ");
+        int key = scanner.nextInt();
+        
+        int binaryCount = binarySearch(arr, key);
+        
+        scanner.close();
+	}
+
+}
